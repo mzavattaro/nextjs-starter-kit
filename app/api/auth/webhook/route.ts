@@ -11,7 +11,7 @@ export async function POST(req: Request) {
 
   if (!WEBHOOK_SECRET) {
     throw new Error(
-      "Please add WEBHOOK_SECRET from Clerk Dashboard to .env or .env.local"
+      "Please add CLERK_WEBHOOK_SECRET from Clerk Dashboard to .env or .env.local"
     );
   }
 
@@ -55,7 +55,7 @@ export async function POST(req: Request) {
   const { id } = evt.data;
   const eventType = evt.type;
 
-  console.log('eventType', eventType)
+  console.log("eventType", eventType);
 
   if (eventType === "user.created") {
     try {
@@ -67,8 +67,7 @@ export async function POST(req: Request) {
         user_id: payload?.data?.id,
       });
 
-
-      console.log('res', response)
+      console.log("res", response);
       return NextResponse.json({
         status: 200,
         message: "User info inserted",
